@@ -24,7 +24,6 @@ function Book(title, author) {
 
 function createLibrary() {
   const books = [];
-
   return {
     addBook(book) {
       books.push(book);
