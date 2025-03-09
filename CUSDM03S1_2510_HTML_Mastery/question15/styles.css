@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+header {
+    background: linear-gradient(to right, #0044cc, #00b4d8);
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+main {
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.projects table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.projects th, .projects td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+}
+
+.projects th {
+    background-color: #002855;
+    color: white;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.contact label {
+    margin-top: 10px;
+}
+
+.contact input, .contact textarea {
+    padding: 8px;
+    margin-top: 5px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contact textarea {
+    height: 80px;
+}
+
+.contact button {
+    margin-top: 10px;
+    background: #0044cc;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.contact button:hover {
+    background: #002855;
+}
