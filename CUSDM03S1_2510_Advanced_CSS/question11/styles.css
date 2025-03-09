@@ -1,0 +1,9 @@
+/* Descendant Combinator: Styles all <p> elements inside <div> */
+.container p {
+    color: blue;
+}
+
+/* Child Combinator: Styles only the direct <p> child of <div> */
+.container > p {
+    font-weight: bold;
+}

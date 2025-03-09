@@ -1,0 +1,132 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Bar Styling */
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #1e1e1e;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* Styling Sections */
+.nav-section {
+    width: 30%;
+}
+
+.nav-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #ddd;
+}
+
+/* Base Link Styling */
+.nav-section a {
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Descendant Combinator - Different Colors */
+.section-1 a {
+    color: #6ab7ff;
+}
+
+.section-2 a {
+    color: #4caf50;
+}
+
+.section-3 a {
+    color: #ff9800;
+}
+
+/* Child Combinator - Direct child links bold */
+.nav-section > ul > li > a {
+    font-weight: bold;
+}
+
+/* Hover Effect */
+.nav-section a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+/* Active Effect */
+.nav-section a:active {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+/* Attribute Selector - Links with HTTPS (Overrides All) */
+a[href^="https"] {
+    color: cyan !important;
+    font-weight: bold;
+}
+
+/* Navigation List */
+.nav-section ul {
+    list-style: none;
+}
+
+.nav-section ul li {
+    padding: 8px 0;
+    position: relative;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #333;
+    min-width: 160px;
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Dropdown Links */
+.dropdown li {
+    padding: 10px;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px;
+    color: white;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Dropdown Hover */
+.dropdown a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Show Dropdown on Hover */
+.nav-section ul li:hover .dropdown {
+    display: block;
+    opacity: 1;
+}
+
+/* Media Queries (Responsive Design) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-section {
+        width: 100%;
+        text-align: center;
+    }
+}

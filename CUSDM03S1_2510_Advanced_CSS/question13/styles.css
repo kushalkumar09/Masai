@@ -1,0 +1,20 @@
+/* Style the first list item in bold */
+ol li:first-child {
+    font-weight: bold;
+}
+
+/* Use adjacent sibling combinator to style the item directly after the first */
+ol li:first-child + li {
+    background-color: lightgray;
+}
+
+/* Use general sibling combinator to italicize all items after the third */
+ol li:nth-child(3) ~ li {
+    font-style: italic;
+}
+
+/* Use :hover pseudo-class to change color on hover */
+ol li:hover {
+    color: darkblue;
+    cursor: pointer;
+}
