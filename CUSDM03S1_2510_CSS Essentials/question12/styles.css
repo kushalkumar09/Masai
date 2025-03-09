@@ -1,0 +1,16 @@
+/* Default style for all paragraphs */
+p {
+    font-size: 16px;
+}
+
+/* Styling for the first paragraph */
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+/* Styling for the second paragraph */
+.note {
+    font-style: italic;
+    color: darkgreen;
+}

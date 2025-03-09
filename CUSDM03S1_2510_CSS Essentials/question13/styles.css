@@ -1,0 +1,30 @@
+/* Universal selector to remove default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styling for the h1 element */
+#main-title {
+    font-size: 32px;
+    color: darkblue;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Styling for the h2 element */
+#subtitle {
+    font-size: 24px;
+    color: darkgreen;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Styling for paragraphs */
+p {
+    padding: 10px;
+    border: 1px solid lightgray;
+    margin: 10px;
+    font-size: 16px;
+}
