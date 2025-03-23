@@ -1,0 +1,46 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Navbar Container */
+  .navbar {
+    display: flex;
+    justify-content: space-between; /* Pushes logo left and links right */
+    align-items: center; /* Aligns items vertically */
+    background-color: #333;
+    padding: 15px 30px;
+  }
+  
+  /* Logo */
+  .logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Links Container */
+  .links {
+    display: flex;
+    gap: 20px; /* Adds spacing between links */
+  }
+  
+  /* Navbar Links */
+  .links a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .links a:hover {
+    background-color: #555;
+    border-radius: 5px;
+  }
+  

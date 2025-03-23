@@ -1,0 +1,37 @@
+/* Apply border-box for correct sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100vh; /* Full viewport height */
+    background-color: #f8f9fa;
+}
+
+/* Flexbox Container */
+.container {
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+    gap: 20px; /* Adds spacing between items */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Flexbox Items */
+.item {
+    background: lightblue;
+    padding: 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}

@@ -1,0 +1,56 @@
+/* Apply border-box for correct sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column; /* Stack elements (h1, divs) in a column */
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+/* Flexbox Container */
+.container {
+    display: flex;
+    gap: 10px; /* Adds spacing between items */
+    padding: 20px;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 400px;
+}
+
+/* Flexbox Items */
+.item {
+    background: lightblue;
+    padding: 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Default Row Layout */
+.row-layout {
+    flex-direction: row; /* Items will be placed in a row */
+    justify-content: center; /* Centers items horizontally */
+}
+
+/* Column Layout */
+.column-layout {
+    flex-direction: column; /* Items will be stacked in a column */
+    align-items: center; /* Aligns items in the center */
+}
+
+/* Explanation: 
+   - flex-direction: row -> Items are arranged horizontally (default).
+   - flex-direction: column -> Items are stacked vertically.
+*/
