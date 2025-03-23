@@ -1,0 +1,35 @@
+/* Base styles for mobile-first design */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr;  /* Mobile: Single column */
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  /* ✅ Fixed: Medium screens (768px to 1024px) */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .gallery {
+      grid-template-columns: repeat(2, 1fr); /* 🔥 FIXED: 2 columns */
+      gap: 20px; /* 🔥 FIXED: Proper spacing */
+    }
+  }
+  
+  /* ✅ Fixed: Large screens (above 1024px) */
+  @media (min-width: 1025px) { /* 🔥 FIXED: Changed 1024px to 1025px */
+    .gallery {
+      grid-template-columns: repeat(4, 1fr); /* 🔥 FIXED: 4 columns */
+      gap: 20px;
+    }
+  }
+  

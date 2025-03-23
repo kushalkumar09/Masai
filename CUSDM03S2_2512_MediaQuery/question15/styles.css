@@ -1,0 +1,73 @@
+/* Base styles (Mobile-First) */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  .card-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: Single column */
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px;
+  }
+  
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .card img {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .card h2 {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  
+  .card p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .card button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .card button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* ✅ Medium screens (600px - 1024px) → 2 columns */
+  @media (min-width: 600px) {
+    .card-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* ✅ Large screens (>1024px) → 3 columns */
+  @media (min-width: 1025px) {
+    .card-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
