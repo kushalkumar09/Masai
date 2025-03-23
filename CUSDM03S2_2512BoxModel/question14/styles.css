@@ -1,0 +1,39 @@
+/* Apply border-box for correct box dimensions */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Center align the container and ensure no overlapping */
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+/* Ensure boxes have proper spacing and alignment */
+.box {
+  width: 120px;
+  height: 120px;
+  background: lightblue;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fix the position of text without obstructing content */
+.text {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
