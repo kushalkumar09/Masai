@@ -1,0 +1,47 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Dynamic styles for list items */
+.odd-item {
+    font-weight: bold;
+    color: blue;
+}
+
+.even-item {
+    font-style: italic;
+    color: red;
+}

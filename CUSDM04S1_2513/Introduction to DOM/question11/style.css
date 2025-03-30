@@ -1,0 +1,22 @@
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* JavaScript will add these dynamic styles */
+.js-blue-text {
+    color: blue;
+}
+
+.js-yellow-bg {
+    background-color: yellow;
+}
