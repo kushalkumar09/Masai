@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Task Manager</h1>
+        <input type="text" id="taskInput" placeholder="Enter task">
+        <button id="addTaskBtn">Add Task</button>
+        
+        <div class="filters">
+            <button id="allTasks">All Tasks</button>
+            <button id="completedTasks">Completed</button>
+            <button id="incompleteTasks">Incomplete</button>
+            <button id="sortTasks">Sort A-Z</button>
+        </div>
+
+        <ul id="taskList"></ul>
+
+        <div class="counters">
+            <p>Total Tasks: <span id="totalCount">0</span></p>
+            <p>Completed: <span id="completedCount">0</span></p>
+            <p>Incomplete: <span id="incompleteCount">0</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

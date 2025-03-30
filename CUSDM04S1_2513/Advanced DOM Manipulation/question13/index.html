@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Propagation Demo</title>
+  <style>
+    .outer { padding: 30px; background-color: lightcoral; }
+    .middle { padding: 20px; background-color: lightblue; }
+    .inner { padding: 10px; background-color: lightgreen; }
+  </style>
+</head>
+<body>
+  <div class="outer" id="outerDiv">
+    Outer Div
+    <button id="outerButton">Outer Button</button>
+    <div class="middle" id="middleDiv">
+      Middle Div
+      <button id="middleButton">Middle Button</button>
+      <div class="inner" id="innerDiv">
+        Inner Div
+        <button id="innerButton">Inner Button</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showAlert(event) {
+      alert(`${event.currentTarget.id} clicked!`);
+    }
+
+    function stopPropagation(event) {
+      alert("Inner button clicked! Stopping propagation.");
+      event.stopPropagation(); // Stops event propagation
+    }
+
+    // Adding event listeners for bubbling phase (default)
+    document.getElementById('outerDiv').addEventListener('click', showAlert);
+    document.getElementById('middleDiv').addEventListener('click', showAlert);
+    document.getElementById('innerDiv').addEventListener('click', showAlert);
+
+    document.getElementById('outerButton').addEventListener('click', showAlert);
+    document.getElementById('middleButton').addEventListener('click', showAlert);
+    document.getElementById('innerButton').addEventListener('click', stopPropagation);
+
+    // Adding event listeners for capturing phase
+    document.getElementById('outerDiv').addEventListener('click', showAlert, true);
+    document.getElementById('middleDiv').addEventListener('click', showAlert, true);
+    document.getElementById('innerDiv').addEventListener('click', showAlert, true);
+
+  </script>
+</body>
+</html>
