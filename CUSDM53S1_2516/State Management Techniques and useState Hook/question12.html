@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter with Step Control</title>
+
+    <!-- React & ReactDOM CDN -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React App -->
+    <script type="text/babel">
+      const { useState } = React;
+
+      function CounterWithStep() {
+        const [count, setCount] = useState(0);
+        const [step, setStep] = useState(1);
+
+        const handleIncrease = () => {
+          setCount((prev) => prev + parseInt(step || 0));
+        };
+
+        const handleDecrease = () => {
+          setCount((prev) => Math.max(0, prev - parseInt(step || 0)));
+        };
+
+        const handleStepChange = (e) => {
+          const value = parseInt(e.target.value);
+          setStep(isNaN(value) ? 1 : value);
+        };
+
+        return (
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <h2>Counter: {count}</h2>
+            <div>
+              <label>
+                Step:
+                <input
+                  type="number"
+                  value={step}
+                  onChange={handleStepChange}
+                  min="1"
+                  style={{ marginLeft: "8px" }}
+                />
+              </label>
+            </div>
+            <div style={{ marginTop: "20px" }}>
+              <button onClick={handleIncrease}>Increase</button>
+              <button onClick={handleDecrease} style={{ marginLeft: "10px" }}>
+                Decrease
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<CounterWithStep />);
+    </script>
+  </body>
+</html>

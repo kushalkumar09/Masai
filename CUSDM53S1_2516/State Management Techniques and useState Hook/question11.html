@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toggle Button with Dynamic Message</title>
+
+    <!-- React & ReactDOM -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <!-- Babel (for JSX support) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React App -->
+    <script type="text/babel">
+      const { useState } = React;
+
+      function ToggleMessage() {
+        const [isVisible, setIsVisible] = useState(false);
+
+        const handleToggle = () => {
+          setIsVisible((prev) => !prev);
+        };
+
+        return (
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <button onClick={handleToggle}>
+              {isVisible ? "Hide" : "Show"}
+            </button>
+            {isVisible && (
+              <p style={{ marginTop: "20px", fontSize: "18px" }}>
+                Hello, welcome to React state management!
+              </p>
+            )}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<ToggleMessage />);
+    </script>
+  </body>
+</html>
