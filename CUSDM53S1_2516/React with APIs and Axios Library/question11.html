@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controlled Form Basics</title>
+
+    <!-- React & ReactDOM -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <!-- Babel (to compile JSX in browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React App -->
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        const [username, setUsername] = useState("");
+        function handleSubmit(e) {
+          e.preventDefault();
+          if (username === "") {
+            alert("Please enter a username.");
+            return;
+          }
+          alert(`Username: ${username}`);
+        }
+        return (
+          <>
+            <form onSubmit={handleSubmit}>
+              <label htmlFor="username">
+                Username:
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </label>
+              <button type="submit">Submit</button>
+            </form>
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

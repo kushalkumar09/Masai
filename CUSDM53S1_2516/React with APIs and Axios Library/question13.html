@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Form Field Management</title>
+
+    <!-- React & ReactDOM -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <!-- Babel (to compile JSX in browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React App -->
+    <script type="text/babel">
+      const { useState } = React;
+
+      function App() {
+        const [emails, setEmails] = useState([{ email: "", error: "" }]);
+
+        function handleSubmit(e) {
+          e.preventDefault();
+          const hasError = emails.some(
+            (item) => item.error || item.email === ""
+          );
+          if (hasError) {
+            alert("Please fix the errors before submitting.");
+          } else {
+            alert(
+              "Submitted Emails:\n" + emails.map((e) => e.email).join("\n")
+            );
+          }
+        }
+
+        const handleChange = (index, value) => {
+          const updatedEmails = [...emails];
+          updatedEmails[index].email = value;
+
+          // Email validation regex
+          const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+          updatedEmails[index].error =
+            isValid || value === "" ? "" : "Invalid email address";
+
+          setEmails(updatedEmails);
+        };
+
+        function addEmailField() {
+          setEmails([...emails, { email: "", error: "" }]);
+        }
+
+        function removeEmailField(index) {
+          const newEmails = [...emails];
+          newEmails.splice(index, 1);
+          setEmails(newEmails);
+        }
+
+        return (
+          <>
+            <form onSubmit={handleSubmit}>
+              {emails.map((item, index) => (
+                <div key={index}>
+                  <label htmlFor={`email-${index}`}>
+                    Email {index + 1}:
+                    <input
+                      type="email"
+                      id={`email-${index}`}
+                      name="email"
+                      value={item.email}
+                      onChange={(e) => handleChange(index, e.target.value)}
+                    />
+                    {item.error && (
+                      <span style={{ color: "red" }}>{item.error}</span>
+                    )}
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => removeEmailField(index)}
+                    disabled={emails.length === 1}
+                  >
+                    Remove Email
+                  </button>
+                </div>
+              ))}
+              <button type="button" onClick={addEmailField}>
+                Add Email
+              </button>
+              <button type="submit">Submit</button>
+            </form>
+          </>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>

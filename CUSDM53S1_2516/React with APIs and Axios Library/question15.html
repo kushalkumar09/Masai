@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management System</title>
+
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      function App() {
+        const [users, setUsers] = useState([]);
+        const [form, setForm] = useState({ name: "", email: "", id: null });
+        const [error, setError] = useState("");
+
+        const firebaseURL = "https://masai-assignment-react-default-rtdb.asia-southeast1.firebasedatabase.app/users";
+
+        const validateEmail = (email) =>
+          /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+        const fetchUsers = async () => {
+          try {
+            const res = await axios.get(`${firebaseURL}.json`);
+            if (res.data) {
+              const data = Object.entries(res.data).map(([id, user]) => ({
+                id,
+                ...user,
+              }));
+              setUsers(data);
+            } else {
+              setUsers([]);
+            }
+          } catch (err) {
+            console.error(err);
+            setError("Failed to load users.");
+          }
+        };
+
+        useEffect(() => {
+          fetchUsers();
+        }, []);
+
+        const handleChange = (e) => {
+          const { name, value } = e.target;
+          setForm({ ...form, [name]: value });
+        };
+
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          if (!form.name || !form.email) {
+            return setError("All fields are required.");
+          }
+          if (!validateEmail(form.email)) {
+            return setError("Invalid email format.");
+          }
+
+          try {
+            if (form.id) {
+              // Edit mode
+              await axios.patch(`${firebaseURL}/${form.id}.json`, {
+                name: form.name,
+                email: form.email,
+              });
+            } else {
+              // Add new user
+              await axios.post(`${firebaseURL}.json`, {
+                name: form.name,
+                email: form.email,
+              });
+            }
+
+            setForm({ name: "", email: "", id: null });
+            setError("");
+            fetchUsers();
+          } catch (err) {
+            console.error(err);
+            setError("Error saving user.");
+          }
+        };
+
+        const handleEdit = (user) => {
+          setForm(user);
+          setError("");
+        };
+
+        const handleDelete = async (id) => {
+          try {
+            await axios.delete(`${firebaseURL}/${id}.json`);
+            fetchUsers();
+          } catch (err) {
+            console.error(err);
+            setError("Error deleting user.");
+          }
+        };
+
+        return (
+          <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
+            <h2>User Management</h2>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={form.name}
+                onChange={handleChange}
+              />
+              <br />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+              />
+              <br />
+              <button type="submit">
+                {form.id ? "Update User" : "Add User"}
+              </button>
+            </form>
+
+            <hr />
+
+            <h3>All Users</h3>
+            <ul>
+              {users.map((user) => (
+                <li key={user.id}>
+                  <strong>{user.name}</strong> - {user.email}
+                  <br />
+                  <button onClick={() => handleEdit(user)}>Edit</button>
+                  <button onClick={() => handleDelete(user.id)}>Delete</button>
+                  <br />
+                  <br />
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
