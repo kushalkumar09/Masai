@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FeedBack Board</title>
+
+    <!-- React & ReactDOM -->
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <!-- Babel (to compile JSX in browser) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React App -->
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+      const firebaseUrl =
+        "https://feedback-board-24f5e-default-rtdb.asia-southeast1.firebasedatabase.app/feedback";
+
+      const FeedbackForm = ({ onSubmit }) => {
+        const [name, setName] = useState("");
+        const [email, setEmail] = useState("");
+        const [comment, setComment] = useState("");
+
+        const handleSubmit = (e) => {
+          e.preventDefault();
+          if (!name || !email || !comment) {
+            alert("All fields are required!");
+            return;
+          }
+          if (!/\S+@\S+\.\S+/.test(email)) {
+            alert("Invalid email format!");
+            return;
+          }
+          onSubmit({ name, email, comment });
+          setName("");
+          setEmail("");
+          setComment("");
+        };
+
+        return (
+          <>
+          <h1>FeedBack Form</h1>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <textarea
+                placeholder="Comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                required
+              ></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </>
+        );
+      };
+
+      const FeedbackList = ({ feedback, onDelete }) => {
+        return feedback.map((item) => (
+          <FeedbackItem key={item.id} item={item} onDelete={onDelete} />
+        ));
+      };
+
+      const FeedbackItem = ({ item, onDelete }) => {
+        return (
+          <div className="feedback-item">
+            <h3>{item.name} </h3>
+            <p>{item.comment}</p>
+            <p>{item.email}</p>
+            <button onClick={() => onDelete(item.id)}>Delete</button>
+          </div>
+        );
+      };
+
+      const ThemeToggle = ({ theme, onToggle }) => {
+        return (
+          <button onClick={onToggle}>
+            Switch to {theme === "light" ? "Dark" : "Light"} Mode
+          </button>
+        );
+      };
+
+      const App = () => {
+        const [feedback, setFeedback] = useState([]);
+        const [theme, setTheme] = useState("light");
+        console.log("rendering app");
+        useEffect(() => {
+          const fetchData = async () => {
+            try {
+              const response = await fetch(`${firebaseUrl}.json`, {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+              const data = await response.json();
+              if (!data) return;
+              console.log(data);
+              const feedbackArray = Object.keys(data).map((key) => ({
+                id: key,
+                ...data[key],
+              }));
+              setFeedback(feedbackArray);
+            } catch (error) {
+              console.error("Error fetching data:", error);
+            }
+          };
+          fetchData();
+        }, []);
+
+        const handleDelete = (id) => {
+          fetch(
+            `https://feedback-board-24f5e-default-rtdb.asia-southeast1.firebasedatabase.app/feedback/${id}.json`,
+            {
+              method: "DELETE",
+            }
+          ).then(() => {
+            setFeedback(feedback.filter((item) => item.id !== id));
+          });
+        };
+
+        const handleThemeToggle = () => {
+          const newTheme = theme === "light" ? "dark" : "light";
+          setTheme(newTheme);
+          localStorage.setItem("theme", newTheme);
+        };
+
+        const handleFormSubmit = (data) => {
+          fetch(`${firebaseUrl}.json`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              setFeedback([...feedback, { id: data.name, ...data }]);
+            });
+        };
+        useEffect(() => {
+          const savedTheme = localStorage.getItem("theme");
+          if (savedTheme) {
+            setTheme(savedTheme);
+          }
+        }, []);
+
+        return (
+          <div className={`app ${theme}`}>
+            <header>
+              <nav>
+                <h1>Feedback Board</h1>
+                <ThemeToggle theme={theme} onToggle={handleThemeToggle} />
+              </nav>
+            </header>
+            <FeedbackForm onSubmit={handleFormSubmit} />
+            <FeedbackList feedback={feedback} onDelete={handleDelete} />
+          </div>
+        );
+      };
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
