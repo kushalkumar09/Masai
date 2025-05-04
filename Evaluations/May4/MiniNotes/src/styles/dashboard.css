@@ -1,0 +1,103 @@
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Title */
+  .container h1 {
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+  }
+  
+  /* Input & Textarea */
+  .container input,
+  .container textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s;
+  }
+  
+  .container input:focus,
+  .container textarea:focus {
+    border-color: #3b82f6;
+  }
+  
+  /* Add Button */
+  .container button {
+    padding: 0.8rem 1.5rem;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .container button:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Notes List */
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  /* Note Card */
+  .note {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Note Title */
+  .note h3 {
+    margin: 0 0 0.5rem;
+    color: #111827;
+    font-size: 1.1rem;
+  }
+  
+  /* Note Content */
+  .note p {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    color: #374151;
+  }
+  
+  /* Delete Button */
+  .note button {
+    align-self: flex-start;
+    padding: 0.4rem 0.8rem;
+    background-color: #ef4444;
+    color: white;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .note button:hover {
+    background-color: #dc2626;
+  }
+  
